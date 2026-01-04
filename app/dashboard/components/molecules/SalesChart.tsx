@@ -48,29 +48,32 @@ export default function SalesChart() {
       </select>
 
       {/* CHART BUTTONS */}
-      <div className="mb-4">
-        <button
-          onClick={() => setChartType("line")}
-          className="border px-4 py-2 rounded mr-2"
-        >
-          Line Chart
-        </button>
+      <div className="mb-4 mx-auto">
+        <div>
+          <button
+            onClick={() => setChartType("line")}
+            className="border px-4 py-2 rounded mr-2"
+          >
+            Line Chart
+          </button>
 
-        <button
-          onClick={() => setChartType("bar")}
-          className="border px-4 py-2 rounded mr-2"
-        >
-          Bar Chart
-        </button>
+          <button
+            onClick={() => setChartType("bar")}
+            className="border px-4 py-2 rounded mr-2"
+          >
+            Bar Chart
+          </button>
 
-        <button
-          onClick={() => setChartType("pie")}
-          className="border px-4 py-2 rounded"
-        >
-          Pie Chart
-        </button>
+          <button
+            onClick={() => setChartType("pie")}
+            className="border px-4 py-2 rounded"
+          >
+            Pie Chart
+          </button>
+        </div>
+
       </div>
-
+      
       {/* LINE CHART */}
       {chartType === "line" && (
         <LineChart width={500} height={300} data={filteredData}>
