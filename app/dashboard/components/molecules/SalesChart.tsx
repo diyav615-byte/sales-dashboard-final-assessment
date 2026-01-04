@@ -23,9 +23,20 @@ const salesData = [
   { year: 2024, month: "Feb", sales: 550 },
 ];
 
+interface SalesRecord {
+  month: string;
+  sales: number;
+  year: number;
+}
+
+interface SalesChartProps {
+  data: SalesRecord[];
+}
+
+
 const COLORS = ["#0088FE", "#00C49F"];
 
-export default function SalesChart() {
+export default function SalesChart({ data }: SalesChartProps) {
   const [selectedYear, setSelectedYear] = useState(2023);
   const [chartType, setChartType] = useState<"line" | "pie" | "bar">("line");
 
@@ -73,7 +84,7 @@ export default function SalesChart() {
         </div>
 
       </div>
-      
+
       {/* LINE CHART */}
       {chartType === "line" && (
         <LineChart width={500} height={300} data={filteredData}>
