@@ -19,7 +19,6 @@ export default function Home() {
       </p>
 
       <div className="mt-8">
-        <SalesChart data={salesData} />
       </div>
     </main>
   );

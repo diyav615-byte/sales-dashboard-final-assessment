@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import SalesCharts from "./components/molecules/SalesChart";
-import { salesDataByYear, SalesRecord } from "./data/salesData";
+import { salesDataByYear} from "./data/salesData";
+import { SalesRecord } from "./type/sales";
 
 export default function Dashboard() {
   const [year, setYear] = useState<number>(2023);
@@ -13,7 +14,7 @@ export default function Dashboard() {
     const data = salesDataByYear[year] || [];
     
     if (threshold !== "") {
-      return data.filter((item) => item.value >= threshold);
+      return data.filter((item) => item.sales >= threshold);
     }
     return data;
   }, [year, threshold]);
@@ -46,7 +47,7 @@ export default function Dashboard() {
 
       {/* Charts */}
       <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg">
-        <SalesCharts data={filteredData} />
+        <SalesCharts data ={filteredData} />
       </div>
     </div>
   );

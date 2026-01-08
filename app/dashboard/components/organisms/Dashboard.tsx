@@ -3,26 +3,28 @@
 import { useState } from "react";
 import SalesChart from "../molecules/SalesChart";
 import { salesDataByYear } from "../../data/salesData";
+import { SalesRecord } from "../../type/sales";
 
 export default function DashboardPage() {
   const [year, setYear] = useState(2023);
   const [threshold, setThreshold] = useState<number | "">("");
 
-  // Filter data based on threshold
-  const filteredData = salesDataByYear[year].filter(
-    (item) => threshold === "" || item.value >= threshold
-  );
+  const filteredData: SalesRecord[] =
+    salesDataByYear[year]?.filter(
+      (item) => threshold === "" || item.sales >= threshold
+    ) ?? [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-100 via-green-100 to-orange-100 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center text-black">Sales Dashboard</h1>
+    <div className="min-h-screen p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        Sales Dashboard
+      </h1>
 
-      {/* Year Dropdown */}
       <div className="flex justify-center mb-4 gap-4">
         <select
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
-          className="p-2 rounded border border-black bg-white text-black"
+          className="p-2 rounded border"
         >
           <option value={2023}>2023</option>
           <option value={2024}>2024</option>
@@ -31,14 +33,15 @@ export default function DashboardPage() {
 
         <input
           type="number"
-          placeholder="Enter sales threshold"
+          placeholder="Sales threshold"
           value={threshold}
-          onChange={(e) => setThreshold(e.target.value === "" ? "" : Number(e.target.value))}
-          className="p-2 rounded border border-black text-black"
+          onChange={(e) =>
+            setThreshold(e.target.value === "" ? "" : Number(e.target.value))
+          }
+          className="p-2 rounded border"
         />
       </div>
 
-      {/* Charts */}
       <SalesChart data={filteredData} />
     </div>
   );
