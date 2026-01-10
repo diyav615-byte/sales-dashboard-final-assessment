@@ -4,15 +4,15 @@ import { useState, useMemo } from "react";
 import SalesCharts from "./components/molecules/SalesChart";
 import { salesDataByYear} from "./data/salesData";
 import { SalesRecord } from "./type/sales";
+import Dashboard  from "./components/organisms/Dashboard";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const [year, setYear] = useState<number>(2023);
   const [threshold, setThreshold] = useState<number | "">("");
 
   // useMemo prevents recalculating on every render unless year or threshold changes
   const filteredData = useMemo(() => {
     const data = salesDataByYear[year] || [];
-    
     if (threshold !== "") {
       return data.filter((item) => item.sales >= threshold);
     }
@@ -51,4 +51,5 @@ export default function Dashboard() {
       </div>
     </div>
   );
-}
+      return <Dashboard/>;
+    }
